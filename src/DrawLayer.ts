@@ -8,8 +8,11 @@ class DrawLayer extends egret.DisplayObjectContainer {
     private drawFinished: boolean = true;
     private drawing: boolean = false;
 
-    public constructor () {
+    private global: Main;
+
+    public constructor (parent: Main) {
         super();
+        this.global = parent;
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
 
@@ -22,8 +25,6 @@ class DrawLayer extends egret.DisplayObjectContainer {
         //     background: 0xffffff
         // });
         this.addChild(this.canvas);
-
-        this.canvas.graphics.lineStyle(3, 0xff0000, 1, true, "", "", "round");
 
         this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin, this);
         // this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
@@ -59,6 +60,8 @@ class DrawLayer extends egret.DisplayObjectContainer {
         const pc = this.pointCollector;
         const currentPointPosition = pc.length - 1;
         const lastPointPosition = pc.length - 2;
+        
+        brush.lineStyle(this.global.controller.brushSize || 6, 0xff0000, 1, true, "", "", "round");
 
         brush.moveTo(pc[currentPointPosition][0], pc[currentPointPosition][1]);
         brush.lineTo(pc[lastPointPosition][0], pc[lastPointPosition][1]);

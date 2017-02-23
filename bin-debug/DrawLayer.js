@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var DrawLayer = (function (_super) {
     __extends(DrawLayer, _super);
-    function DrawLayer() {
+    function DrawLayer(parent) {
         var _this = _super.call(this) || this;
         _this.canvas = new egret.Shape();
         _this.pointCollector = [];
@@ -17,6 +17,7 @@ var DrawLayer = (function (_super) {
         _this.drawAnchor = 0;
         _this.drawFinished = true;
         _this.drawing = false;
+        _this.global = parent;
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
         return _this;
     }
@@ -28,7 +29,6 @@ var DrawLayer = (function (_super) {
         //     background: 0xffffff
         // });
         this.addChild(this.canvas);
-        this.canvas.graphics.lineStyle(3, 0xff0000, 1, true, "", "", "round");
         this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin, this);
         // this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
         // this.addEventListener(egret.TouchEvent.TOUCH_END, this.onTouchEnd, this);
@@ -57,6 +57,7 @@ var DrawLayer = (function (_super) {
         var pc = this.pointCollector;
         var currentPointPosition = pc.length - 1;
         var lastPointPosition = pc.length - 2;
+        brush.lineStyle(this.global.controller.brushSize || 6, 0xff0000, 1, true, "", "", "round");
         brush.moveTo(pc[currentPointPosition][0], pc[currentPointPosition][1]);
         brush.lineTo(pc[lastPointPosition][0], pc[lastPointPosition][1]);
         brush.endFill();

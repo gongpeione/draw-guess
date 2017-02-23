@@ -8,6 +8,7 @@ var game_file_list = [
 	"libs/modules/tween/tween.js",
 	"libs/modules/socket/socket.js",
 	"polyfill/promise.js",
+	"bin-debug/Controller.js",
 	"bin-debug/DrawLayer.js",
 	"bin-debug/ETools.js",
 	"bin-debug/LoadingView.js",

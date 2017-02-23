@@ -13,6 +13,22 @@ function drawRect (x: number, y: number, width: number, height: number, style: R
     return newRect;
 }
 
+interface CircleStyle {
+    background?,
+    lineWidth?: number,
+    lineColor?
+}
+function drawCircle (x: number, y: number, radius: number, style: RectStyle = {}) {
+    const newCircle = new egret.Sprite();
+    const brush = newCircle.graphics;
+    style.background && brush.beginFill(style.background);
+    style.lineWidth && style.lineColor && brush.lineStyle(style.lineWidth, style.lineColor);
+    brush.drawCircle(x, y, radius);
+    brush.endFill();
+
+    return newCircle;
+}
+
 interface Position {
     x?: number,
     y?: number,

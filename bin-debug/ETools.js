@@ -7,6 +7,16 @@ function drawRect(x, y, width, height, style) {
     newRect.graphics.endFill();
     return newRect;
 }
+function drawCircle(x, y, radius, style) {
+    if (style === void 0) { style = {}; }
+    var newCircle = new egret.Sprite();
+    var brush = newCircle.graphics;
+    style.background && brush.beginFill(style.background);
+    style.lineWidth && style.lineColor && brush.lineStyle(style.lineWidth, style.lineColor);
+    brush.drawCircle(x, y, radius);
+    brush.endFill();
+    return newCircle;
+}
 function drawImg(texture, parame) {
     if (parame === void 0) { parame = {}; }
     var newImg = new egret.Bitmap();

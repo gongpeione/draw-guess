@@ -1,6 +1,11 @@
-class Main extends egret.DisplayObjectContainer {
+interface Global {
+    controller: Controller;
+}
+
+class Main extends egret.DisplayObjectContainer implements Global {
 
     private loadingView: LoadingUI;
+    public controller: Controller;
 
     public constructor() {
         super();
@@ -77,10 +82,15 @@ class Main extends egret.DisplayObjectContainer {
 
     private createGameScene () {
 
-        const drawLayer: DrawLayer = new DrawLayer();
+        const drawLayer: DrawLayer = new DrawLayer(this);
         drawLayer.width = this.stage.stageWidth;
         drawLayer.height = this.stage.stageHeight - 300;
 
-        this.addChild(drawLayer)
+        this.addChild(drawLayer);
+
+        this.controller = new Controller();
+        this.controller.x = 0;
+        this.controller.y = this.stage.stageHeight - 340;
+        this.addChild(this.controller);
     }
 }

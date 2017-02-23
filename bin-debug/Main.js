@@ -73,12 +73,16 @@ var Main = (function (_super) {
         }
     };
     Main.prototype.createGameScene = function () {
-        var drawLayer = new DrawLayer();
+        var drawLayer = new DrawLayer(this);
         drawLayer.width = this.stage.stageWidth;
         drawLayer.height = this.stage.stageHeight - 300;
         this.addChild(drawLayer);
+        this.controller = new Controller();
+        this.controller.x = 0;
+        this.controller.y = this.stage.stageHeight - 340;
+        this.addChild(this.controller);
     };
     return Main;
 }(egret.DisplayObjectContainer));
-__reflect(Main.prototype, "Main");
+__reflect(Main.prototype, "Main", ["Global"]);
 //# sourceMappingURL=Main.js.map
